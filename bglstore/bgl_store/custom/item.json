@@ -35,7 +35,7 @@
    "modified_by": "Administrator",
    "name": "Item-item_barcode_cf",
    "no_copy": 0,
-   "options": null,
+   "options": "Barcode",
    "owner": "Administrator",
    "parent": null,
    "parentfield": null,
