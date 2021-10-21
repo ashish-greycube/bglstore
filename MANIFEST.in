@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include bglstore *.css
+recursive-include bglstore *.csv
+recursive-include bglstore *.html
+recursive-include bglstore *.ico
+recursive-include bglstore *.js
+recursive-include bglstore *.json
+recursive-include bglstore *.md
+recursive-include bglstore *.png
+recursive-include bglstore *.py
+recursive-include bglstore *.svg
+recursive-include bglstore *.txt
+recursive-exclude bglstore *.pyc
