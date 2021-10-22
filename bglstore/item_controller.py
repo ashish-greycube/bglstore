@@ -24,3 +24,21 @@ def validate_and_create_barcode(self,method):
 					})
 					_file.save()
 					self.item_barcode_image_cf= _file.file_url
+				else:
+					file_exists=frappe.db.get_list('File', filters={'file_url': ['=', self.item_barcode_image_cf]})
+					if len(file_exists)==0:
+						item_barcode_cf = self.barcodes[0].barcode
+						if item_barcode_cf:
+							buffer = io.BytesIO()
+							Code128(str(item_barcode_cf), writer=SVGWriter()).write(buffer)
+							_file = frappe.get_doc({
+								"doctype": "File",
+								"file_name": "%s.svg" % frappe.generate_hash()[:8],
+								"attached_to_doctype": self.doctype,
+								"attached_to_name": self.name,
+								"attached_to_field":'item_barcode_image_cf',
+								"content": buffer.getvalue()
+							})
+							_file.save()
+							self.item_barcode_image_cf= _file.file_url						
+
