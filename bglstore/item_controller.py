@@ -6,6 +6,21 @@ from barcode import Code128
 from barcode.writer import SVGWriter
 from frappe.model.naming import make_autoname
 
+# from bglstore.item_controller import reset_bgls_naming_series
+# frappe.call('bglstore.item_controller.reset_bgls_naming_series', {
+#     current: '5'
+# }).then(r => {
+#     console.log(r.message)
+# })
+@frappe.whitelist()
+def reset_bgls_naming_series(current=0):
+	naming_series=frappe.db.sql("""UPDATE `tabSeries` set current=%(current)s where name='BGLS' 
+				""",{"current":current},as_dict=True)	
+	frappe.db.commit()
+	result=frappe.db.sql("""select current from `tabSeries` where name='BGLS'""",as_dict=True)	
+	return result
+		
+
 def validate_and_create_barcode(self,method):
 		if self.has_variants==0:
 				if not self.item_barcode_image_cf:
