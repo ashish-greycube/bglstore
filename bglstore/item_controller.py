@@ -12,6 +12,11 @@ from frappe.model.naming import make_autoname
 # }).then(r => {
 #     console.log(r.message)
 # })
+# frappe.call('bglstore.item_controller.reset_bgls_naming_series')
+#     .then(r => {
+#         console.log(r)
+#         // {message: "pong"}
+#     }
 @frappe.whitelist()
 def reset_bgls_naming_series(current=0):
 	naming_series=frappe.db.sql("""UPDATE `tabSeries` set current=%(current)s where name='BGLS' 
